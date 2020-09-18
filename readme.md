@@ -1,4 +1,4 @@
-Cricket assignment
+# Cricket assignment
 
 This is an application based on Django.
 It has functionality to add team, player, and Matches and create Matches fixtures for creating tournaments dynamically.
@@ -38,8 +38,8 @@ $ source env/bin/activate
 ```
 Below are the page URLs: -
 
-front page: http://127.0.0.1:8000/
-teams list: http://127.0.0.1:8000/team/list
-players list: http://127.0.0.1:8000/player/list
-create a tournament: http://127.0.0.1:8000/matches/fixtures
-Create a fixture: http://127.0.0.1:8000/all_fixtures
+- Front page: http://127.0.0.1:8000/
+- teams list: http://127.0.0.1:8000/team/list
+- Players list: http://127.0.0.1:8000/player/list
+- Create a tournament: http://127.0.0.1:8000/matches/fixtures
+- Create a fixture: http://127.0.0.1:8000/all_fixtures
