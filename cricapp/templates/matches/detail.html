@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Below are the details of {{ match.match_number }}</h2>
+
+<ul class="list-group list-group-flush">
+    <li class="list-group-item">
+        Tournament#: {{ match.tournament_id }}
+    </li>
+    <li class="list-group-item">
+        Location: {{ match.location }}
+    </li>
+    <li class="list-group-item">
+        Stadium: {{ match.stadium }}
+    </li>
+    <li class="list-group-item">
+        Teams Playing:
+        <ul>
+            <li>{{match.team1}}</li>
+            <li>{{match.team2}}</li>
+        </ul>
+    </li>
+    <li class="list-group-item">
+        Match Winner: {{ match.team_winner }}
+    </li>
+    <li class="list-group-item mx-auto">
+        <a class="btn btn-primary" href="{% url 'cricapp:home' %}"> Home </a>
+    </li>
+
+</ul>
+
+{% endblock content %}

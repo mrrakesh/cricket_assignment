@@ -1,0 +1,13 @@
+{% extends 'base.html' %} {% block content %}
+<h2>Tournament # {{tournament_no}} created successfully.</h2>
+
+<h4>Below are the details of matches of the tournament.</h4>
+<ul class="list-group list-group-flush">
+  {% for match in match_possibilities %}
+  <li class="list-group-item"><strong>{{match.0}}</strong> <em>v/s</em> <strong>{{match.1}}</strong></li>
+  {% endfor %}
+  <li class="list-group-item"><a class="btn btn-primary" href="{% url 'cricapp:all_fixture_list' %}">Create Fixture</a>
+  </li>
+</ul>
+
+{% endblock content %}

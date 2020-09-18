@@ -1,0 +1,34 @@
+{% extends 'base.html' %} {% block content %}
+<h4>Cricket matchs</h4>
+{% if messages %}
+<div class="alert alert-success">
+  {% for message in messages %} {{ message }} {% endfor %}
+</div>
+{% endif %} {% if match_list %}
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Match Number</th>
+      <th scope="col">Stadium</th>
+      <th scope="col">Location</th>
+      <th scope="col">Tournament number</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for match in match_list %}
+
+    <tr>
+      <td>
+        <a href="{{ match.id }}/">{{ match.match_number }}</a>
+      </td>
+      <td>{{ match.match_stadium }}</td>
+      <td>{{ match.match_location }}</td>
+      <td>{{ match.match_tournament }}</td>
+    </tr>
+
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>No Match exist.</p>
+{% endif %} {% endblock content %}

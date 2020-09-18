@@ -1,0 +1,12 @@
+{% extends 'base.html' %} {% load crispy_forms_tags %} {% block content %}
+
+<h4>Add Player</h4>
+<form method="post">
+  {% csrf_token %} {{form | crispy}}
+  <button type="submit" class="btn btn-primary">Save</button>
+  <a class="btn btn-secondary" href="{% url 'cricapp:players' %}">
+    All Players
+  </a>
+</form>
+
+{% endblock content %}y

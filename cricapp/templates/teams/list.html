@@ -1,0 +1,37 @@
+{% extends 'base.html' %} {% block content %}
+<h4>Cricket Teams</h4>
+<div class="pull-right"><a href="{% url 'cricapp:add_team' %}">Create Team</a></div>
+{% if messages %}
+<div class="alert alert-success">
+  {% for message in messages %} {{ message }} {% endfor %}
+</div>
+{% endif %} {% if teams_list %}
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Logo</th>
+      <th scope="col">Club State</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for team in teams_list %}
+
+    <tr>
+      <td>
+        <a href="{% url 'cricapp:team_detail' team.id %}">{{ team.name }}</a>
+      </td>
+      <td>
+        <img src="{{ team.logo_uri }}" alt="Team Image" width="100" />
+      </td>
+      <td>{{ team.club_state }}</td>
+    </tr>
+
+    {% endfor %}
+  </tbody>
+</table>
+
+{% else %}
+<p>No team exist.</p>
+{% endif %} {% endblock content %}

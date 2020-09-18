@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>The Cricpro App</h1>
+<a href="{% url 'cricapp:create_fixtures' %}" class="btn btn-primary">Set up new Tournament</a>
+
+<h2>Point table</h2>
+<table class="table">
+    <tr>
+        <th>Team</th>
+        <th>Points</th>
+    </tr>
+    {% for team in teams %}
+    <tr>
+        <td>{{team.name}}</td>
+        <td>{{team.points}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h2>Match Details</h2>
+<table class="table">
+    <tr>
+        <th>Match #</th>
+        <th>Location</th>
+        <th>Stadium</th>
+        <th>Teams</th>
+        <th>Won</th>
+        <th>Details</th>
+    </tr>
+    {% for match in matches %}
+    <tr>
+        <td>
+            {% if match.level == 'Semi' %}
+            <strong>Semi Finals</strong>
+            {% elif match.level == 'Final' %}
+            <strong>Finals</strong>
+            {% else %}
+            {{ match.match_number }}
+            {% endif %}</td>
+        <td>{{ match.location }}</td>
+        <td>{{ match.stadium }}</td>
+        <td><strong>{{match.team1}}</strong> <em>v/s</em> <strong>{{match.team2}}</strong></td>
+        <td>{{match.team_winner}}</td>
+        <td><a href="{% url 'cricapp:match_details' match.id %}">Get details</a></td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="4">No match exist.</td>
+    </tr>
+    {% endfor %}
+</table>
+<ul>
+
+</ul>
+{% endblock content%}

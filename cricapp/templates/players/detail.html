@@ -1,0 +1,18 @@
+{% extends 'base.html' %} {% block content %}
+
+<div>
+  <p>{{ player.first_name }} {{ player.last_name }}</p>
+  <img src="{{ player.image_uri }}" alt="<Player Image>" />
+
+</div>
+
+<b>Jersey Number: {{ player.jersey_number }}</b>
+<br />
+<i>Country: {{ player.country }}</i>
+<br />
+
+<p>Team : {{team}} </p>
+
+</ul>
+
+{% endblock content %}

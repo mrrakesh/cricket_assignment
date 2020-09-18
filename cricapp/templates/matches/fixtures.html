@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Tournament # {{trmt_id}}</h1>
+{% if final_teams %}
+<h4>Final match</h4>
+<table class="table table-bordered">
+    <tr>
+        <td>
+            {% if final_teams.0 %}<strong>{{final_teams.0.name}}</strong> {% endif %}
+            <em>v/s</em>
+            {% if final_teams.1 %}<strong>{{final_teams.1.name}}</strong> {% endif %}
+            {% if final_winner %}
+            <strong style="float:right">{{final_winner}} is Winner</strong>
+            {% else %}
+            <a href="{% url 'cricapp:select_finalist' final_teams.0.id final_teams.1.id trmt_id %}"
+                style="float:right; margin-right: 10px;">{{final_teams.0.name}} Wins</a>
+            <a href="{% url 'cricapp:select_finalist' final_teams.1.id final_teams.0.id trmt_id %}"
+                style="float:right; margin-right: 10px;">{{final_teams.1.name}} Wins</a>
+            {% endif %}
+        </td>
+    </tr>
+</table>
+{% endif %}
+{% if qualified_teams %}
+<h4>List of Semifinal matches.</h4>
+<table class="table table-bordered">
+    <tr>
+        <td>
+            <strong>{{qualified_teams.0.name}}</strong> <em>v/s</em><strong>{{qualified_teams.3.name}}</strong>
+            {% if qualified_teams.0.is_win or qualified_teams.3.is_win %}
+            {% if qualified_teams.0.is_win %}
+            <a href="#" style="float:right">{{qualified_teams.0.name}} Won</a>
+            {% else %}
+            <a href="#" style="float:right">{{qualified_teams.3.name}} Won</a>
+            {% endif %}
+            {% else %}
+            <a href="{% url 'cricapp:select_semifinalist' qualified_teams.0.id qualified_teams.3.id trmt_id %}"
+                style="float:right">{{qualified_teams.0.name}} Wins</a>
+            <a href="{% url 'cricapp:select_semifinalist' qualified_teams.3.id qualified_teams.0.id trmt_id %}"
+                style="float:right; margin-right: 10px;">{{qualified_teams.3.name}} Wins</a>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>{{qualified_teams.1.name}}</strong> <em>v/s</em><strong>{{qualified_teams.2.name}}</strong>
+            {% if qualified_teams.1.is_win or qualified_teams.2.is_win %}
+            {% if qualified_teams.1.is_win %}
+            <a href="#" style="float:right">{{qualified_teams.1.name}} Won</a>
+            {% else %}
+            <a href="#" style="float:right">{{qualified_teams.2.name}} Won</a>
+            {% endif %}
+            {% else %}
+            <a href="{% url 'cricapp:select_semifinalist' qualified_teams.1.id qualified_teams.2.id trmt_id %}"
+                style="float:right">{{qualified_teams.1.name}} Wins</a>
+            <a href="{% url 'cricapp:select_semifinalist' qualified_teams.2.id qualified_teams.1.id trmt_id %}"
+                style="float:right; margin-right: 10px;">{{qualified_teams.2.name}} Wins</a>
+            {% endif %}
+        </td>
+    </tr>
+</table>
+{% endif %}
+{% if teams %}
+
+<h4>List of teams and points.</h4>
+<table class="table table-bordered">
+    {% for team in teams %}
+    <tr>
+        <td><strong>{{team.name}}</strong>
+            <a href="#" style="float:right">{{team.points}}</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+
+<h4>List of First Round matches.</h4>
+<table class="table table-bordered">
+    {% for match in matches %}
+    <tr>
+        <td><strong>{{match.team1}}</strong> <em>v/s</em>
+            <strong>{{match.team2}}</strong>
+            {% if trmt_id %}
+            {% if match.match_win %}
+            <a href="#" style="float:right">{{match.match_win}} won</a>
+            {% else %}
+            <a href="{% url 'cricapp:select_match_winner' match.team1_id match.match_id match.trmt_id %}"
+                style="float:right">{{match.team1}} Wins</a>
+            <a href="{% url 'cricapp:select_match_winner' match.team2_id match.match_id match.trmt_id %}"
+                style="float:right; margin-right: 10px;">{{match.team2}} Wins</a>
+            {% endif %}
+            {% else %}
+            {% if match.is_completed == 'Yes' %}
+            <em style="float:right">Tournament is Over</em>
+            {% else %}
+            <a href="{% url 'cricapp:single_fixture_list' match.trmt_id %}" style="float:right">Tournament</a>
+            {% endif %}
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock content %}
